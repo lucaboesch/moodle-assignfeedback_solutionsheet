@@ -22,8 +22,6 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
-
 define('ASSIGNFEEDBACK_SOLUTIONSHEET_FILEAREA', 'solutionsheet');
 
 /**
@@ -50,7 +48,7 @@ class assign_feedback_solutionsheet extends assign_feedback_plugin {
      * @return array names of the fileareas, can be an empty array
      */
     public function get_config_file_areas() {
-        return array(ASSIGNFEEDBACK_SOLUTIONSHEET_FILEAREA);
+        return [ASSIGNFEEDBACK_SOLUTIONSHEET_FILEAREA];
     }
 
     /**
@@ -58,7 +56,7 @@ class assign_feedback_solutionsheet extends assign_feedback_plugin {
      * @return array - An array of fileareas (keys) and descriptions (values)
      */
     public function get_file_areas() {
-        return array(ASSIGNFEEDBACK_SOLUTIONSHEET_FILEAREA => $this->get_name());
+        return [ASSIGNFEEDBACK_SOLUTIONSHEET_FILEAREA => $this->get_name()];
     }
 
     /**
@@ -69,9 +67,11 @@ class assign_feedback_solutionsheet extends assign_feedback_plugin {
     private function count_files() {
 
         $fs = get_file_storage();
-        $files = $fs->get_area_files($this->assignment->get_context()->id,
-                        'assignfeedback_solutionsheet', ASSIGNFEEDBACK_SOLUTIONSHEET_FILEAREA,
-                        0, 'id', false);
+        $files = $fs->get_area_files(
+            $this->assignment->get_context()->id,
+            'assignfeedback_solutionsheet', ASSIGNFEEDBACK_SOLUTIONSHEET_FILEAREA,
+            0, 'id', false
+        );
 
         return count($files);
     }
@@ -91,51 +91,77 @@ class assign_feedback_solutionsheet extends assign_feedback_plugin {
         $defaultrequiresubmission = $this->get_config('requiresubmission');
         $defaulthideafter = $this->get_config('hideafter');
 
-        $mform->addElement('filemanager', 'assignfeedback_solutionsheet_upload',
-                        get_string('uploadsolutionsheets', 'assignfeedback_solutionsheet'),
-                        null, array('subdirs' => 0) );
+        $mform->addElement(
+            'filemanager', 'assignfeedback_solutionsheet_upload',
+            get_string('uploadsolutionsheets', 'assignfeedback_solutionsheet'),
+            null, ['subdirs' => 0]
+        );
         $mform->hideIf('assignfeedback_solutionsheet_upload', 'assignfeedback_solutionsheet_enabled', 'notchecked');
 
-        $showatgroup = array();
+        $showatgroup = [];
         $showatgroup[] = $mform->createElement('radio', 'assignfeedback_solutionsheet_showattype', null, get_string('no'), 0);
 
         if ($this->should_display_yesimmediate()) {
             $PAGE->requires->js_call_amd('assignfeedback_solutionsheet/settings_form', 'init');
-            $showatgroup[] = $mform->createElement('radio', 'assignfeedback_solutionsheet_showattype', null,
-                get_string('yesimmediate', 'assignfeedback_solutionsheet'), 1);
+            $showatgroup[] = $mform->createElement(
+                'radio', 'assignfeedback_solutionsheet_showattype', null,
+                get_string('yesimmediate', 'assignfeedback_solutionsheet'), 1
+            );
         }
 
-        $showatgroup[] = $mform->createElement('radio', 'assignfeedback_solutionsheet_showattype', null,
-                                                get_string('yesfromprefix', 'assignfeedback_solutionsheet'), 2);
+        $showatgroup[] = $mform->createElement(
+            'radio', 'assignfeedback_solutionsheet_showattype', null,
+            get_string('yesfromprefix', 'assignfeedback_solutionsheet'), 2
+        );
         $showatgroup[] = $mform->createElement('duration', 'assignfeedback_solutionsheet_showattime', '');
-        $showatgroup[] = $mform->createElement('static', 'assignfeedback_solutionsheet_showatpost', '',
-                                                get_string('yesfromsuffix', 'assignfeedback_solutionsheet'));
-        $mform->addGroup($showatgroup, 'showatgroup',
-                         get_string('showsolutions', 'assignfeedback_solutionsheet'), '&nbsp;&nbsp;', false);
+        $showatgroup[] = $mform->createElement(
+            'static', 'assignfeedback_solutionsheet_showatpost', '',
+            get_string('yesfromsuffix', 'assignfeedback_solutionsheet')
+        );
+        $mform->addGroup(
+            $showatgroup, 'showatgroup',
+            get_string('showsolutions', 'assignfeedback_solutionsheet'), '&nbsp;&nbsp;', false
+        );
 
         $mform->setDefault('assignfeedback_solutionsheet_showattype', $defaultshowattype);
         $mform->setDefault('assignfeedback_solutionsheet_showattime', $defaultshowattime);
-        $mform->hideIf('showatgroup',
-                'assignfeedback_solutionsheet_enabled', 'notchecked');
-        $mform->disabledIf('assignfeedback_solutionsheet_showattime[number]',
-                           'assignfeedback_solutionsheet_showattype', 'neq', '2');
-        $mform->disabledIf('assignfeedback_solutionsheet_showattime[timeunit]',
-                           'assignfeedback_solutionsheet_showattype', 'neq', '2');
+        $mform->hideIf(
+            'showatgroup',
+            'assignfeedback_solutionsheet_enabled', 'notchecked'
+        );
+        $mform->disabledIf(
+            'assignfeedback_solutionsheet_showattime[number]',
+            'assignfeedback_solutionsheet_showattype', 'neq', '2'
+        );
+        $mform->disabledIf(
+            'assignfeedback_solutionsheet_showattime[timeunit]',
+            'assignfeedback_solutionsheet_showattype', 'neq', '2'
+        );
 
-        $mform->addElement('advcheckbox', 'assignfeedback_solutionsheet_requiresubmission',
-                        get_string('requiresubmission', 'assignfeedback_solutionsheet'));
-        $mform->addHelpButton('assignfeedback_solutionsheet_requiresubmission',
-                              'requiresubmission', 'assignfeedback_solutionsheet');
+        $mform->addElement(
+            'advcheckbox', 'assignfeedback_solutionsheet_requiresubmission',
+            get_string('requiresubmission', 'assignfeedback_solutionsheet')
+        );
+        $mform->addHelpButton(
+            'assignfeedback_solutionsheet_requiresubmission',
+            'requiresubmission', 'assignfeedback_solutionsheet'
+        );
         $mform->setDefault('assignfeedback_solutionsheet_requiresubmission', $defaultrequiresubmission);
-        $mform->hideIf('assignfeedback_solutionsheet_requiresubmission',
-                       'assignfeedback_solutionsheet_enabled', 'notchecked');
+        $mform->hideIf(
+            'assignfeedback_solutionsheet_requiresubmission',
+            'assignfeedback_solutionsheet_enabled', 'notchecked'
+        );
 
-        $mform->addElement('date_time_selector', 'assignfeedback_solutionsheet_hideafter',
-                        get_string('hidesolutionsafter', 'assignfeedback_solutionsheet'),
-                        array ('optional' => true) );
+        $mform->addElement(
+            'date_time_selector', 'assignfeedback_solutionsheet_hideafter',
+            get_string('hidesolutionsafter', 'assignfeedback_solutionsheet'),
+            ['optional' => true]
+        );
         $mform->setDefault('assignfeedback_solutionsheet_hideafter', $defaulthideafter);
-        $mform->hideIf('assignfeedback_solutionsheet_hideafter',
-                'assignfeedback_solutionsheet_enabled', 'notchecked');
+        $mform->hideIf(
+            'assignfeedback_solutionsheet_hideafter',
+            'assignfeedback_solutionsheet_enabled', 'notchecked'
+        );
     }
 
     /**
@@ -180,8 +206,10 @@ class assign_feedback_solutionsheet extends assign_feedback_plugin {
         $ctx = $this->assignment->get_context();
         $ctxid = $ctx ? $ctx->id : 0;
         $draftitemid = file_get_submitted_draft_itemid('assignfeedback_solutionsheet_upload');
-        file_prepare_draft_area($draftitemid, $ctxid, 'assignfeedback_solutionsheet',
-                                ASSIGNFEEDBACK_SOLUTIONSHEET_FILEAREA, 0, array('subdirs' => 0));
+        file_prepare_draft_area(
+            $draftitemid, $ctxid, 'assignfeedback_solutionsheet',
+            ASSIGNFEEDBACK_SOLUTIONSHEET_FILEAREA, 0, ['subdirs' => 0]
+        );
         $defaultvalues['assignfeedback_solutionsheet_upload'] = $draftitemid;
     }
 
@@ -193,8 +221,10 @@ class assign_feedback_solutionsheet extends assign_feedback_plugin {
      * @return bool - on error the subtype should call set_error and return false.
      */
     public function save_settings(stdClass $formdata) {
-        file_save_draft_area_files($formdata->assignfeedback_solutionsheet_upload, $this->assignment->get_context()->id,
-        'assignfeedback_solutionsheet', ASSIGNFEEDBACK_SOLUTIONSHEET_FILEAREA, 0);
+        file_save_draft_area_files(
+            $formdata->assignfeedback_solutionsheet_upload, $this->assignment->get_context()->id,
+            'assignfeedback_solutionsheet', ASSIGNFEEDBACK_SOLUTIONSHEET_FILEAREA, 0
+        );
         $this->set_config('showattype', $formdata->assignfeedback_solutionsheet_showattype);
         $this->set_config('showattime', $formdata->assignfeedback_solutionsheet_showattime);
         $this->set_config('requiresubmission', $formdata->assignfeedback_solutionsheet_requiresubmission);
@@ -219,8 +249,10 @@ class assign_feedback_solutionsheet extends assign_feedback_plugin {
             $canviewanytime = has_capability('assignfeedback/solutionsheet:viewsolutionanytime', $context);
             if ($canview) {
                 // Print links to the solution sheets.
-                $s = $this->assignment->render_area_files('assignfeedback_solutionsheet',
-                                ASSIGNFEEDBACK_SOLUTIONSHEET_FILEAREA, 0);
+                $s = $this->assignment->render_area_files(
+                    'assignfeedback_solutionsheet',
+                    ASSIGNFEEDBACK_SOLUTIONSHEET_FILEAREA, 0
+                );
                 $classes = 'solutionsheet';
                 if (!$this->can_students_view_solutions()) {
                     $classes .= ' greyedout';
@@ -231,8 +263,9 @@ class assign_feedback_solutionsheet extends assign_feedback_plugin {
                 // If students can see the solutions, we may want to hide them.
                 if (has_capability('assignfeedback/solutionsheet:releasesolution', $context)) {
                     $o .= html_writer::div(
-                                $renderer->render($this->get_solutions_showhide_link(false)),
-                                'solutionshowhide');
+                        $renderer->render($this->get_solutions_showhide_link(false)),
+                        'solutionshowhide'
+                    );
                 }
             } else {
                 // If students can't see the solutions, print a notice to teachers, and possibly a "show" link.
@@ -376,10 +409,10 @@ class assign_feedback_solutionsheet extends assign_feedback_plugin {
      * @param bool $showit Determine which link to generate.
      * @return moodle_url The show/ hide link.
      */
-    private function get_solutions_showhide_link ($showit) {
-        $params = array('cmid' => $this->assignment->get_course_module()->id,
+    private function get_solutions_showhide_link($showit) {
+        $params = ['cmid' => $this->assignment->get_course_module()->id,
                         'show' => $showit,
-                        'sesskey' => sesskey() );
+                        'sesskey' => sesskey(), ];
         $url = new moodle_url('/mod/assign/feedback/solutionsheet/showsolutions.php', $params);
 
         if ($showit) {

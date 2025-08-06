@@ -37,11 +37,12 @@ require_once($CFG->dirroot.'/mod/assign/locallib.php');
  * @return bool false if file not found, does not return if found - just send the file
  */
 function assignfeedback_solutionsheet_pluginfile($course,
-                $cm,
-                context $context,
-                $filearea,
-                $args,
-                $forcedownload) {
+    $cm,
+    context $context,
+    $filearea,
+    $args,
+    $forcedownload
+) {
     global $USER, $DB;
 
     if ($context->contextlevel != CONTEXT_MODULE) {
@@ -67,7 +68,7 @@ function assignfeedback_solutionsheet_pluginfile($course,
     $fullpath = "/{$context->id}/assignfeedback_solutionsheet/$filearea/$itemid/$relativepath";
 
     $fs = get_file_storage();
-    if (!$file = $fs->get_file_by_hash(sha1($fullpath)) or $file->is_directory()) {
+    if (!$file = $fs->get_file_by_hash(sha1($fullpath)) || $file->is_directory()) {
         return false;
     }
     // Download MUST be forced - security!

@@ -28,12 +28,12 @@ $cmid    = required_param('cmid', PARAM_INT);    // Course module ID.
 $showit  = required_param('show', PARAM_BOOL);   // Show solutions or hide them.
 
 $cm = get_coursemodule_from_id('assign', $cmid, 0, false, MUST_EXIST);
-$course = $DB->get_record('course', array('id' => $cm->course), '*', MUST_EXIST);
+$course = $DB->get_record('course', ['id' => $cm->course], '*', MUST_EXIST);
 
-$paras = array('assignment' => $cm->instance,
+$paras = ['assignment' => $cm->instance,
                 'subtype' => 'assignfeedback',
                 'plugin' => 'solutionsheet',
-                'name' => 'showattype');
+                'name' => 'showattype', ];
 $conf = $DB->get_record('assign_plugin_config', $paras, '*', MUST_EXIST);
 
 require_login($course->id, false, $cm);
@@ -48,4 +48,4 @@ $conf->value = $showit ? 1 : 0;
 
 $DB->update_record('assign_plugin_config', $conf);
 
-redirect(new moodle_url('/mod/assign/view.php', array('id' => $cm->id)), get_string('changessaved'));
+redirect(new moodle_url('/mod/assign/view.php', ['id' => $cm->id]), get_string('changessaved'));

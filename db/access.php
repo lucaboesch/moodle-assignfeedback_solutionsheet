@@ -24,41 +24,41 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$capabilities = array(
+$capabilities = [
 
-                'assignfeedback/solutionsheet:viewsolution' => array(
+                'assignfeedback/solutionsheet:viewsolution' => [
 
                     'captype' => 'read',
                     'contextlevel' => CONTEXT_MODULE,
-                    'archetypes' => array(
+                    'archetypes' => [
                         'student' => CAP_ALLOW,
                         'teacher' => CAP_ALLOW,
                         'editingteacher' => CAP_ALLOW,
-                        'manager' => CAP_ALLOW
-                    )
-                ),
+                        'manager' => CAP_ALLOW,
+                    ],
+                ],
 
-                'assignfeedback/solutionsheet:viewsolutionanytime' => array(
+                'assignfeedback/solutionsheet:viewsolutionanytime' => [
 
                     'captype' => 'read',
                     'contextlevel' => CONTEXT_MODULE,
-                    'archetypes' => array(
+                    'archetypes' => [
                         'teacher' => CAP_ALLOW,
                         'editingteacher' => CAP_ALLOW,
-                        'manager' => CAP_ALLOW
-                    )
-                ),
+                        'manager' => CAP_ALLOW,
+                    ],
+                ],
 
-                'assignfeedback/solutionsheet:releasesolution' => array(
+                'assignfeedback/solutionsheet:releasesolution' => [
 
                    'captype' => 'read',
                    'contextlevel' => CONTEXT_MODULE,
-                   'archetypes' => array(
+                   'archetypes' => [
                        'teacher' => CAP_ALLOW,
                        'editingteacher' => CAP_ALLOW,
-                       'manager' => CAP_ALLOW
-                   ),
-                   'clonepermissionsfrom' => 'moodle/course:manageactivities'
-                )
+                       'manager' => CAP_ALLOW,
+                   ],
+                   'clonepermissionsfrom' => 'moodle/course:manageactivities',
+                ],
 
-            );
+            ];

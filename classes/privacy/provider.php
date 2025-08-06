@@ -21,9 +21,8 @@
  * @copyright 2018 Henning Bostelmann
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-namespace assignfeedback_solutionsheet\privacy;
 
-defined('MOODLE_INTERNAL') || die();
+namespace assignfeedback_solutionsheet\privacy;
 
 /**
  * Null provider for assignfeedback_solutionsheet.
@@ -42,7 +41,7 @@ class provider implements \core_privacy\local\metadata\null_provider {
      *
      * @return  string
      */
-    public static function get_reason() : string {
+    public static function get_reason(): string {
         return 'privacy:metadata';
     }
 }

@@ -27,10 +27,10 @@ Feature: In an assignment, teachers can upload solution sheets
       | user | course | role |
       | teacher1 | C1 | editingteacher |
       | student1 | C1 | student |
-    
+
     And I am on the "Test assignment name" Activity page logged in as teacher1
     And I navigate to "Settings" in current page administration
-    And I follow "Expand all"
+    And I expand all fieldsets
     And I set the field "assignfeedback_solutionsheet_enabled" to "1"
     And I upload "mod/assign/feedback/solutionsheet/tests/fixtures/solutionsheet.txt" file to "Upload solution sheets" filemanager
     And I press "Save and display"
@@ -83,7 +83,7 @@ Feature: In an assignment, teachers can upload solution sheets
   Scenario: A teacher can set the solutions to be available after the deadline.
     When I am on the "Test assignment name" Activity page logged in as teacher1
     And I navigate to "Settings" in current page administration
-    And I follow "Expand all"
+    And I expand all fieldsets
     And I click on "id_assignfeedback_solutionsheet_showattype_2" "field"
     And I set the following fields to these values:
       | assignfeedback_solutionsheet_showattime[number]   | 10   |
@@ -102,7 +102,7 @@ Feature: In an assignment, teachers can upload solution sheets
 
     When I am on the "Test assignment name" Activity page logged in as teacher1
     And I navigate to "Settings" in current page administration
-    And I follow "Expand all"
+    And I expand all fieldsets
     And I set the following fields to these values:
       | duedate[year]  | 2010 |
     And I press "Save and display"
@@ -132,7 +132,7 @@ Feature: In an assignment, teachers can upload solution sheets
   Scenario: A teacher can hide the solution sheets after a defined date.
     When I am on the "Test assignment name" Activity page logged in as teacher1
     And I navigate to "Settings" in current page administration
-    And I follow "Expand all"
+    And I expand all fieldsets
     And I click on "Yes, from now on" "radio"
     Then I should see "Are you sure you want to show solutions to students from now on?"
     When I press "Yes"
@@ -153,7 +153,7 @@ Feature: In an assignment, teachers can upload solution sheets
 
     When I am on the "Test assignment name" Activity page logged in as teacher1
     And I navigate to "Settings" in current page administration
-    And I follow "Expand all"
+    And I expand all fieldsets
     And I set the following fields to these values:
       | assignfeedback_solutionsheet_hideafter[day]    | 1    |
       | assignfeedback_solutionsheet_hideafter[month]  | 1    |

@@ -16,7 +16,6 @@
 /**
  * Activity setting form js functionality.
  *
- * @package     assignfeedback_solutionsheet
  * @author      Dmitrii Metelkin <dmitriim@catalyst-au.net>
  * @copyright   2018 Catalyst IT Australia {@link http://www.catalyst-au.net}
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -45,6 +44,7 @@ function($, ajax, str, notification) {
 
         /**
          * Displays a confirmation pop-up dialog when click to "Yes, from now on" radio button.
+         * @param {Event} e The event object.
          */
         displayConfirmDialog: function(e) {
 
@@ -83,7 +83,7 @@ function($, ajax, str, notification) {
          *
          * @returns {boolean}
          */
-        shouldDisplayConfirmDialog: function () {
+        shouldDisplayConfirmDialog: function() {
             var selectedValue = $("input[name='assignfeedback_solutionsheet_showattype']:checked").val();
 
             return (selectedValue === settingsForm.yesFromNowValue && settingsForm.curentValue !== settingsForm.yesFromNowValue);

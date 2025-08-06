@@ -30,7 +30,7 @@ Feature: In an assignment, students can see solutions only if they have made a s
       | student2 | C1 | student |
     And I am on the "Test assignment name" Activity page logged in as teacher1
     And I navigate to "Settings" in current page administration
-    And I follow "Expand all"
+    And I expand all fieldsets
     And I set the field "assignfeedback_solutionsheet_enabled" to "1"
     And I set the field "assignfeedback_solutionsheet_requiresubmission" to "1"
     And I upload "mod/assign/feedback/solutionsheet/tests/fixtures/solutionsheet.txt" file to "Upload solution sheets" filemanager

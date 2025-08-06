@@ -24,39 +24,37 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$string['pluginname'] = 'Solution sheet';
-/* ------------------------------------------------------------ */
-$string['solutionsheet:viewsolution'] = 'View solution sheets after the deadline';
-$string['solutionsheet:viewsolutionanytime'] = 'View solution sheets at any time';
-$string['solutionsheet:releasesolution'] = 'Release solution sheets at any time';
-/* ------------------------------------------------------------ */
-$string['privacy:metadata'] = 'The solution sheet plugin does not store personal data,
- but only configuration data for the assignment (including the solution sheet itself).';
-/* ------------------------------------------------------------ */
-$string['default'] = 'Enabled by default';
-$string['default_help'] = 'If set, solutionsheet upload will be enabled by default for all new assignments.';
-$string['enabled'] = 'Solution sheets';
-$string['enabled_help'] = 'If enabled, the teacher can upload one or more solution sheets for this assignment.';
-$string['fromnowon'] = 'Enable from now on';
-$string['fromnowon_help'] = 'If enabled, a teacher can select showing the solution sheet immediately at assignment creation time.';
-$string['enabled_link'] = 'assignfeedback/solutionsheet';
-$string['dohidesolutions'] = 'Click to hide the solutions from students.';
-$string['doshowsolutions'] = 'Click to show the solutions to students now.';
 $string['confirmhidesolutions'] = 'Are you sure you want to hide the solutions from students?';
 $string['confirmshowsolutions'] = 'Are you sure you want to show the solutions to students now?';
+$string['confirmtext'] = 'Are you sure you want to show solutions to students from now on?';
+$string['confirmtitle'] = 'Confirmation';
+$string['default'] = 'Enabled by default';
+$string['default_help'] = 'If set, solutionsheet upload will be enabled by default for all new assignments.';
+$string['dohidesolutions'] = 'Click to hide the solutions from students.';
+$string['doshowsolutions'] = 'Click to show the solutions to students now.';
+$string['enabled'] = 'Solution sheets';
+$string['enabled_help'] = 'If enabled, the teacher can upload one or more solution sheets for this assignment.';
+$string['enabled_link'] = 'assignfeedback/solutionsheet';
+$string['fromnowon'] = 'Enable from now on';
+$string['fromnowon_help'] = 'If enabled, a teacher can select showing the solution sheet immediately at assignment creation time.';
 $string['hidesolutionsafter'] = 'Hide solutions after';
+$string['pluginname'] = 'Solution sheet';
+$string['privacy:metadata'] = 'The solution sheet plugin does not store personal data,
+ but only configuration data for the assignment (including the solution sheet itself).';
 $string['requiresubmission'] = 'Require submission to view';
 $string['requiresubmission_help'] = 'If enabled, students can see the solutions only if they made a submission on the assignment. This is in addition to any other restrictions.';
 $string['requiresubmissionmsg'] = 'Only students who made a submission will be able to see the solutions.';
 $string['showsolutions'] = 'Show solutions to students';
 $string['solutions'] = 'Solution sheets';
 $string['solutionsfrom'] = 'The solutions will be available from {$a}.';
+$string['solutionsheet:releasesolution'] = 'Release solution sheets at any time';
+$string['solutionsheet:viewsolution'] = 'View solution sheets after the deadline';
+$string['solutionsheet:viewsolutionanytime'] = 'View solution sheets at any time';
 $string['solutionsnolonger'] = 'The solutions are no longer available.';
-$string['solutionsnotforstudents'] = '<strong>Note:</strong> Students can <strong>not</strong> currently access the solutions. ';
+$string['solutionsnotforstudents'] = '<strong>Note:</strong> Students can <strong>not</strong> currently access the solutions.';
 $string['solutionsnotyet'] = 'The solutions are not yet available.';
 $string['uploadsolutionsheets'] = 'Upload solution sheets';
-$string['yesimmediate'] = 'Yes, from now on';
 $string['yesfromprefix'] = 'Yes, ';
 $string['yesfromsuffix'] = 'after the due date';
-$string['confirmtitle'] = 'Confirmation';
-$string['confirmtext'] = 'Are you sure you want to show solutions to students from now on?';
+$string['yesimmediate'] = 'Yes, from now on';
+
